@@ -1,14 +1,17 @@
-import React,{Component} from 'react';
+import React from "react";
 
-class ToDo extends Component{
-  render(){
-    return(
-      <div>
-       {this.props.id} <input type="checkbox"/>{this.props.item}
-        <hr/>
-      </div>
-    )
-  }
+function ToDo(props) {
+  return (
+    <div>
+      <input
+        type="checkbox"
+        checked={props.completed}
+        onChange={() => props.handleChange(props.id)}
+      />
+      {props.item}
+      <hr />
+    </div>
+  );
 }
 
-export default ToDo
+export default ToDo;

@@ -2,52 +2,50 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import ToDo from "./ToDo";
 import ToDoMap from "./ToDoMap";
+import Counter from "./counter";
 import "./styles.css";
 
-class App extends React.Component {
+class App extends Component {
   constructor() {
     super();
     this.state = {
-      ct: 0
+      todos: ToDoMap
     };
-    this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
-  handleClick() {
+  handleChange(id) {
     this.setState(prevState => {
+      const updatedTodos = prevState.todos.map(todo => {
+        if (todo.id === id) {
+          todo.completed = !todo.completed;
+        }
+        return todo;
+      });
       return {
-        ct: prevState.ct + 1
+        todos: updatedTodos
       };
     });
+    console.log("changed", id);
   }
 
   render() {
-    const todoItems = ToDoMap.map(items => (
-      <ToDo item={items.item} id={items.id} />
+    const todoItems = this.state.todos.map(items => (
+      <ToDo
+        id={items.id}
+        item={items.item}
+        key={items.id}
+        handleChange={this.handleChange}
+      />
     ));
 
     return (
       <div>
-        <h2>{this.state.ct}</h2>
-        <h2>
-          <button onClick={this.handleClick}>
-            <h4>Click Me</h4>
-          </button>
-        </h2>
         {todoItems}
+        <div>
+          <Counter />
+        </div>
       </div>
     );
-  }
-}
-
-class Header extends React.Component {
-  render() {
-    return <p>Hi this header {this.props.username}</p>;
-  }
-}
-
-class Greeting extends Component {
-  render() {
-    return <p>Hi this is footer</p>;
   }
 }
 
