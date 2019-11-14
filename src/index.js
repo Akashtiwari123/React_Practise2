@@ -28,12 +28,12 @@ class App extends React.Component {
     return (
       <div>
         <h2>{this.state.ct}</h2>
-        <br />
-        <button onClick={this.handleClick}>Click Me</button>
+        <h2>
+          <button onClick={this.handleClick}>
+            <h4>Click Me</h4>
+          </button>
+        </h2>
         {todoItems}
-        <h1>Id: {this.state.id}</h1>
-        <Header username={this.state.name} />
-        <Greeting />
       </div>
     );
   }
