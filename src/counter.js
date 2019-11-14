@@ -7,10 +7,11 @@ class Counter extends Component {
     this.state = {
       ct: 0
     };
-    this.handleClick = this.handleClick.bind(this);
+    //this.handleClick = this.handleClick.bind(this);
+    // this.handleClick=()=>{this.handleClick(1)};
   }
 
-  handleClick(id) {
+  handleClick() {
     this.setState(prevState => {
       return {
         ct: prevState.ct + 1
@@ -25,7 +26,7 @@ class Counter extends Component {
         <h2>{this.state.ct}</h2>
         <h2>
           <button onClick={this.handleClick}>
-            <h4>Click Me</h4>
+            <h2>Click Me</h2>
           </button>
         </h2>
         <Greeting />
