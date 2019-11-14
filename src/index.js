@@ -5,12 +5,21 @@ import ToDoMap from "./ToDoMap";
 import "./styles.css";
 
 class App extends React.Component {
-  state = {
-    ct: 0
-  };
-  Handle() {
-    this.setState({ ct: 2 });
+  constructor() {
+    super();
+    this.state = {
+      ct: 0
+    };
+    this.handleClick = this.handleClick.bind(this);
   }
+  handleClick() {
+    this.setState(prevState => {
+      return {
+        ct: prevState.ct + 1
+      };
+    });
+  }
+
   render() {
     const todoItems = ToDoMap.map(items => (
       <ToDo item={items.item} id={items.id} />
@@ -18,9 +27,9 @@ class App extends React.Component {
 
     return (
       <div>
-        <p>{this.state.ct}</p>
+        <h2>{this.state.ct}</h2>
         <br />
-        <button onClick={this.Handle}>Click Me</button>
+        <button onClick={this.handleClick}>Click Me</button>
         {todoItems}
         <h1>Id: {this.state.id}</h1>
         <Header username={this.state.name} />
